@@ -95,8 +95,7 @@ wgpu = { version = "0.20.0", default-features = false, features = [
     # Make the renderer `Sync` even on wasm32, because it makes the code simpler:
     "fragile-send-sync-non-atomic-wasm",
 ] }
-winit = { version = "0.29.4", default-features = false }
-
+winit = { git = "https://github.com/DRvader/winit", branch = "stylus-support", default-features = false } 
 
 [workspace.lints.rust]
 unsafe_code = "deny"
@@ -264,3 +263,6 @@ manual_range_contains = "allow"       # this one is just worse imho
 self_named_module_files = "allow"     # Disabled waiting on https://github.com/rust-lang/rust-clippy/issues/9602
 significant_drop_tightening = "allow" # Too many false positives
 wildcard_imports = "allow"            # we do this a lot in egui
+
+[patch.crates-io]
+winit = { git = "https://github.com/DRvader/winit", branch = "stylus-support" }

@@ -123,6 +123,8 @@ struct ActiveTouch {
     /// Note that a value of 0.0 either indicates a very light touch, or it means that the device
     /// is not capable of measuring the touch force.
     force: Option<f32>,
+
+    pen_state: Option<crate::PenState>,
 }
 
 impl TouchState {
@@ -144,15 +146,24 @@ impl TouchState {
                     phase,
                     pos,
                     force,
+                    pen_state,
                 } if device_id == self.device_id => match phase {
                     TouchPhase::Start => {
-                        self.active_touches.insert(id, ActiveTouch { pos, force });
+                        self.active_touches.insert(
+                            id,
+                            ActiveTouch {
+                                pos,
+                                force,
+                                pen_state,
+                            },
+                        );
                         added_or_removed_touches = true;
                     }
                     TouchPhase::Move => {
                         if let Some(touch) = self.active_touches.get_mut(&id) {
                             touch.pos = pos;
                             touch.force = force;
+                            touch.pen_state = pen_state;
                         }
                     }
                     TouchPhase::End | TouchPhase::Cancel => {

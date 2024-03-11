@@ -552,6 +552,7 @@ impl State {
                             phase: egui::TouchPhase::Start,
                             pos,
                             force: None,
+                            pen_state: None,
                         });
                     } else {
                         self.any_pointer_button_down = false;
@@ -564,6 +565,7 @@ impl State {
                             phase: egui::TouchPhase::End,
                             pos,
                             force: None,
+                            pen_state: None,
                         });
                     };
                 }
@@ -596,6 +598,7 @@ impl State {
                     phase: egui::TouchPhase::Move,
                     pos: pos_in_points,
                     force: None,
+                    pen_state: None,
                 });
             }
         } else {
@@ -631,6 +634,13 @@ impl State {
                 }) => Some((force / max_possible_force) as f32),
                 None => None,
             },
+            pen_state: touch.pen_state.map(|v| egui::PenState {
+                rotation: v.rotation,
+                tilt: v.tilt,
+                barrel: v.barrel,
+                inverted: v.inverted,
+                eraser: v.eraser,
+            }),
         });
         // If we're not yet translating a touch or we're translating this very
         // touch …
