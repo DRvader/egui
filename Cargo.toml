@@ -95,7 +95,7 @@ wgpu = { version = "0.20.0", default-features = false, features = [
     # Make the renderer `Sync` even on wasm32, because it makes the code simpler:
     "fragile-send-sync-non-atomic-wasm",
 ] }
-winit = { git = "https://github.com/DRvader/winit", branch = "b7f87704f18e10e83e771a7f1accfb370eaf4b7a", default-features = false } 
+winit = { git = "https://github.com/DRvader/winit", branch = "b7f8770", default-features = false } 
 
 [workspace.lints.rust]
 unsafe_code = "deny"
@@ -265,4 +265,4 @@ significant_drop_tightening = "allow" # Too many false positives
 wildcard_imports = "allow"            # we do this a lot in egui
 
 [patch.crates-io]
-winit = { git = "https://github.com/DRvader/winit", branch = "b7f87704f18e10e83e771a7f1accfb370eaf4b7a" }
+winit = { git = "https://github.com/DRvader/winit", branch = "b7f8770" }
